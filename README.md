@@ -1,4 +1,3 @@
-# DARAZOUKI.github.io
 # Labbgrund till Moment 6 i kursen DT084G, Introduktion till programmering i JavaScript
 ## Dania Abd Almajeed  daab2301@student.miun.se
 
