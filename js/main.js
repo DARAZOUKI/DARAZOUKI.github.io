@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
         {
             name: "P1",
             description: "Talat innehåll om samhälle, kultur och vetenskap. Kanalen erbjuder nyheter och aktualiteter, granskning och fördjupning men också livsåskådnings-och livsstilsprogram samt underhållning och upplevelser till exempel i form av teater.",
-            endpoint: "http://api.sr.se/v2/scheduledepisodes?channelid=132&page=1", // URL for P1 channel
+            endpoint: "http://api.sr.se/v2/scheduledepisodes?channelid=132&page=1",// URL for P1 channel
             streamingLink: "http://sverigesradio.se/topsy/direkt/srapi/132.mp3"
         },
        
