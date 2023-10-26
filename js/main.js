@@ -1,93 +1,101 @@
-// Denna fil ska innehålla din lösning till uppgiften (moment 6).
+"use strict"    ;
 
-"use strict" Dania Abd Almajeed;
 
-/*  Delar till ej obligatorisk funktionalitet, som kan ge poäng för högre betyg
-*   Radera rader för funktioner du vill visa på webbsidan. */
 //document.getElementById("player").style.display = "none";      // Radera denna rad för att visa musikspelare
+
 //document.getElementById("shownumrows").style.display = "none"; // Radera denna rad för att visa antal träffar
 
-/* Här under börjar du skriva din JavaScript-kod */
-
+// Listen for the DOMContentLoaded event before executing JavaScript
 document.addEventListener("DOMContentLoaded", function () {
 
-    const playButton = document.getElementById("playbutton");
-    const playChannelSelect = document.getElementById("playchannel");
-    const numRowsInput = document.getElementById("numrows");
-    const radioPlayer = document.getElementById("radioplayer");
-
-
+   // Define an array of channel data 
     const channelData = [
         {
             name: "P1",
+            id: 132,
             description: "Talat innehåll om samhälle, kultur och vetenskap. Kanalen erbjuder nyheter och aktualiteter, granskning och fördjupning men också livsåskådnings-och livsstilsprogram samt underhållning och upplevelser till exempel i form av teater.",
-            endpoint: "http://api.sr.se/v2/scheduledepisodes?channelid=132&page=1",// URL for P1 channel
+            endpoint: "https://api.sr.se/v2/scheduledepisodes?format=json&size=10&indent=false&channelid=132", // URL for P1 channel
             streamingLink: "http://sverigesradio.se/topsy/direkt/srapi/132.mp3"
         },
        
         {
             name: "P2",
+            id:163,
             description: "P2 är den klassiska musikkanalen som även erbjuder jazz samt folk- och världsmusik. Digitalt sänder vi musikprogram dygnet runt, i FM finns även program på andra språk än svensk",
-            endpoint: "http://api.sr.se/v2/scheduledepisodes?channelid=163&page=1", // URL for P2 channel
+            endpoint: "https://api.sr.se/v2/scheduledepisodes?format=json&size=10&indent=false&channelid=163", // URL for P2 channel
             streamingLink: "http://sverigesradio.se/topsy/direkt/srapi/163.mp3"
         },
         
         {
             name: "P3",
+            id:164,
             description: "Kanalen för dig som gillar ny musik, livesänd radio och högkvalitativa poddar. Lyssna på P3 för populärkultur, samhällsjournalistik, musik och humor.",
-            endpoint: "http://api.sr.se/v2/scheduledepisodes?channelid=164&page=1",
+            endpoint: "https://api.sr.se/v2/scheduledepisodes?format=json&size=10&indent=false&channelid=164",
             streamingLink: "http://sverigesradio.se/topsy/direkt/srapi/164.mp3"
         },
-        // Add more channels with their respective endpoints here
+       
         {
             name: "P4",
+            id:213,
             description: "I P4 Blekinge hör du lokala nyheter, lokala aktualiteter och lokal kultur. Du bjuds på en heltäckande, angelägen kanal där du bor.",
-            endpoint: "http://api.sr.se/v2/scheduledepisodes?channelid=213&page=2",
+            endpoint: "https://api.sr.se/v2/scheduledepisodes?format=json&size=10&indent=false&channelid=213",
             streamingLink: "http://sverigesradio.se/topsy/direkt/srapi/213.mp3"
         },
         {
             name: "P4 Dalarna",
+            id:223,
             description: "P4 Dalarna gör angelägen lokal radio för dalfolket, på plats när det händer. I våra populära program och prisbelönta nyheter hör du ämnen som berör, alltid dagsaktuella och alltid med Dalarna i centrum.",
-            endpoint: "http://api.sr.se/v2/scheduledepisodes?channelid=223&page=2",
+            endpoint: "https://api.sr.se/v2/scheduledepisodes?format=json&size=10&indent=false&channelid=223",
             streamingLink: "http://sverigesradio.se/topsy/direkt/srapi/223.mp3"
         },
         {
             name: "P4 Gotland",
+            id:205,
             description: "P4 Gotland bevakar det som händer på och omkring Gotland, med nyheter, intervjuer och reportage.",
-            endpoint: "http://api.sr.se/v2/scheduledepisodes?channelid=205&page=2",
+            endpoint: "https://api.sr.se/v2/scheduledepisodes?format=json&size=10&indent=false&channelid=205",
             streamingLink: "http://sverigesradio.se/topsy/direkt/srapi/205.mp3"
         },
         {
             name: "P4 Gävleborg",
+            id:210,
             description: "I P4 Gävleborg hör du lokala nyheter, lokala aktualiteter och lokal kultur. Du bjuds på en heltäckande, angelägen kanal där du bor.",
-            endpoint: "http://api.sr.se/v2/scheduledepisodes?channelid=210&page=2",
+            endpoint: "https://api.sr.se/v2/scheduledepisodes?format=json&size=10&indent=false&channelid=210 ",
             streamingLink: "http://sverigesradio.se/topsy/direkt/srapi/210.mp3"
         },
         {
             name: "P4 Göteborg",
+            id:212,
             description: "Sveriges Radio P4 Göteborg ger dig lokala nyheter - i radion och på webben",
-            endpoint: "http://api.sr.se/v2/scheduledepisodes?channelid=212&page=2",
+            endpoint: "https://api.sr.se/v2/scheduledepisodes?format=json&size=10&indent=false&channelid=212",
             streamingLink: "http://sverigesradio.se/topsy/direkt/srapi/212.mp3"
         },
         {
             name: "P4 Halland",
+            id:220,
             description: "P4 Halland erbjuder lokala nyheter och aktualiteter.",
-            endpoint: "https://api.sr.se/v2/scheduledepisodes?channelid=220&page=1",
+            endpoint: "https://api.sr.se/v2/scheduledepisodes?format=json&size=10&indent=false&channelid=220",
             streamingLink: "http://sverigesradio.se/topsy/direkt/srapi/220.mp3"
         },
-        // Add more channels with their respective endpoints here
+        
         {
             name: "P4 Jämtland",
+            id:200,
             description: "I P4 Jämtland hör du lokala nyheter, aktualiteter, väderprognoser, sport och kultur.",
-            endpoint: "http://api.sr.se/v2/scheduledepisodes?channelid=200&page=2" ,
+            endpoint: "https://api.sr.se/v2/scheduledepisodes?format=json&size=10&indent=false&channelid=200" ,
             streamingLink: "http://sverigesradio.se/topsy/direkt/srapi/200.mp3"
         },
     ];
 
-    
 
-  // Function to create and populate the navigation menu
-function createNavigationMenu() {
+     // Define variables to access HTML elements by their IDs
+     const playButton = document.getElementById("playbutton");
+     const playChannelSelect = document.getElementById("playchannel");
+     const numRowsInput = document.getElementById("numrows");
+     const radioPlayer = document.getElementById("radioplayer");  
+
+     
+       // Function to create and populate the navigation menu
+   function createNavigationMenu() {
     const mainnavlist = document.getElementById('mainnavlist');
     mainnavlist.innerHTML = ''; // Clear existing navigation menu
 // Use the selected number of rows from the input
@@ -107,61 +115,69 @@ channelData.slice(0, selectedNumChannels).forEach(channelData =>  {
 
         listItem.appendChild(channelLink);
         mainnavlist.appendChild(listItem);
-        // Event listener for the "Number of Channels" input
-        numRowsInput.addEventListener("input", createNavigationMenu);
+        
     });
 }
 
+    // Function to fetch and display the program schedule for a selected channel
 function fetchChannelData(channelData) {
- // Make an API request for the specific channel using its endpoint
- fetch(channelData.endpoint)
- .then(response => {
-    if (!response.ok) {
-        throw new Error('Network response was not ok');
-    }
-    return response.json();
-})
-.then(xmlText => {
-    // Parse the XML response using DOMParser
-    const parser = new DOMParser();
-    const xmlDoc = parser.parseFromString(xmlText, "text/xml");
-
-    // Extract the schedule elements
-    const scheduleElements = xmlDoc.querySelectorAll('scheduledepisode');
     const scheduleContainer = document.getElementById('info');
-    // Clear existing schedule content
     scheduleContainer.innerHTML = '';
 
-    // Loop through the schedule elements and display them
-    scheduleElements.forEach(scheduleElement => {
-      const title = scheduleElement.querySelector('title').textContent;
-      const startDateTime = new Date(scheduleElement.querySelector('starttimeutc').textContent);
-      const endDateTime = new Date(scheduleElement.querySelector('endtimeutc').textContent);
-      const startTime = startDateTime.toLocaleTimeString();
-      const endTime = endDateTime.toLocaleTimeString();
-      
-      const description = scheduleElement.querySelector('description').textContent;
+ 
+    // Get the current date in YYYY-MM-DD format
+    const currentDate = new Date().toISOString().split('T')[0];
+   
 
-      // Create HTML elements to display the schedule details
-      const scheduleItem = document.createElement('div');
-      scheduleItem.innerHTML = `
-        <h3>${title}</h3>
-        <p>${startTime}- ${endTime}</p>
-        <p>${description}</p>
-      `;
+    // Make an API request to fetch the program schedule for the selected channel
+    fetch(`${channelData.endpoint}&date=${currentDate}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(scheduleData => {
+            scheduleData.schedule.forEach(scheduleItem => {
+                const title = scheduleItem.title || 'Title not available';
+                const description = scheduleItem.description || 'Description not available';
 
-      // Append the schedule item to the container
-      scheduleContainer.appendChild(scheduleItem);
-    });
-  })
- .catch(error => {
-     console.error('Error fetching channel data:', error);
- });
+            const startTimeUtc = parseInt(scheduleItem.starttimeutc.match(/\d+/)[0]);
+            const endTimeUtc = parseInt(scheduleItem.endtimeutc.match(/\d+/)[0]);
+             // Parse start and end times as Date objects
+             const startTime = new Date(startTimeUtc);
+            const endTime = new Date(endTimeUtc);
+
+            const formattedStartTime = formatTime(startTime);
+            const formattedEndTime = formatTime(endTime);
+            const scheduleItemElement = document.createElement('div');
+            scheduleItemElement.innerHTML = `
+                    <h3>${title}</h3>
+                    <p>${description}</p>
+                    <p>${formattedStartTime} - ${formattedEndTime}</p>
+                `;
+
+                scheduleContainer.appendChild(scheduleItemElement);
+             
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching channel data:', error);
+        });
+}
+
+
+//Function to format a date string as "HH:MM"
+function formatTime(date) {
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    return `${hours}:${minutes}`;
 }
 
 
 
-playButton.addEventListener("click", function () {
+ // Event listener for the "Play" button to start streaming a selected channel
+ playButton.addEventListener("click", function () {
     const selectedChannelId = playChannelSelect.value;
     const selectedChannel = channelData.find(channel => channel.name === selectedChannelId);
     if (selectedChannel) {
@@ -177,6 +193,7 @@ playButton.addEventListener("click", function () {
     }
 });
 
+// Function to populate the channel selection dropdown
 function populateChannelSelect() {
     channelData.forEach(channel => {
         const option = document.createElement("option");
@@ -186,14 +203,14 @@ function populateChannelSelect() {
     });
 }
 
+// Event listener for the "Number of Channels" input
+numRowsInput.addEventListener("input", createNavigationMenu);
+
 
 // Call this function to populate the channel select element when the page loads
-populateChannelSelect();
-
-
+populateChannelSelect();  
 
 // Call the function to create and populate the navigation menu when the page loads
- createNavigationMenu();
-
+createNavigationMenu();
 
 });
